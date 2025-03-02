@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sıralama</title>
+</head>
+<body>
+    <h1>Takımların Puan Durumu</h1>
+    <table border="1">
+        <tr>
+            <th>Takım No</th>
+            <th>Toplam Puan</th>
+        </tr>
+        {% for takim in takimlar %}
+        <tr>
+            <td>{{ takim['takim_no'] }}</td>
+            <td>{{ takim['toplam_puan'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/istatistik">
+        <button>Yeni Maç Ekle</button>
+    </a>
+</body>
+</html>

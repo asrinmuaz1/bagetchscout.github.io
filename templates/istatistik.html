@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Maç</title>
+</head>
+<body>
+    <form action="/istatistik" method="POST">
+        <!-- Takım Numarası -->
+        <label for="takim_no">Takım Numarası:</label>
+        <input type="number" id="takim_no" name="takim_no" required>
+        <br><br>
+
+        <!-- Hareket Etti Mi Checkbox -->
+        <label for="hareket">Hareket etti mi?</label>
+        <input type="checkbox" id="hareket" name="hareket" onclick="hesaplaPuan()">
+        <br><br>
+
+        <!-- Otonom Seviyeleri -->
+        <label for="otonomseviye0">Otonom Seviye 0:</label>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye0', 3)">+ OS0</button>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye0', -3)">- OS0</button>
+        <br><br>
+
+        <label for="otonomseviye1">Otonom Seviye 1:</label>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye1', 4)">+ OS1</button>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye1', -4)">- OS1</button>
+        <br><br>
+
+        <label for="otonomseviye2">Otonom Seviye 2:</label>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye2', 6)">+ OS2</button>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye2', -6)">- OS2</button>
+        <br><br>
+
+        <label for="otonomseviye3">Otonom Seviye 3:</label>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye3', 7)">+ OS3</button>
+        <button type="button" onclick="degerArtirAzalt('otonomseviye3', -7)">- OS3</button>
+        <br><br>
+
+        <!-- Diğer Seviyeler -->
+        <label for="seviye0">Seviye 0:</label>
+        <button type="button" onclick="degerArtirAzalt('seviye0', 2)">+ Seviye 0</button>
+        <button type="button" onclick="degerArtirAzalt('seviye0', -2)">- Seviye 0</button>
+        <br><br>
+
+        <label for="seviye1">Seviye 1:</label>
+        <button type="button" onclick="degerArtirAzalt('seviye1', 3)">+ Seviye 1</button>
+        <button type="button" onclick="degerArtirAzalt('seviye1', -3)">- Seviye 1</button>
+        <br><br>
+
+        <label for="seviye2">Seviye 2:</label>
+        <button type="button" onclick="degerArtirAzalt('seviye2', 4)">+ Seviye 2</button>
+        <button type="button" onclick="degerArtirAzalt('seviye2', -4)">- Seviye 2</button>
+        <br><br>
+
+        <label for="seviye3">Seviye 3:</label>
+        <button type="button" onclick="degerArtirAzalt('seviye3', 5)">+ Seviye 3</button>
+        <button type="button" onclick="degerArtirAzalt('seviye3', -5)">- Seviye 3</button>
+        <br><br>
+
+        <!-- Toplam Puan -->
+        <p>Toplam Puan: <span id="toplamPuan">0</span></p>
+
+        <input type="hidden" id="otonomseviye0" name="otonomseviye0" value="0">
+        <input type="hidden" id="otonomseviye1" name="otonomseviye1" value="0">
+        <input type="hidden" id="otonomseviye2" name="otonomseviye2" value="0">
+        <input type="hidden" id="otonomseviye3" name="otonomseviye3" value="0">
+
+        <input type="hidden" id="seviye0" name="seviye0" value="0">
+        <input type="hidden" id="seviye1" name="seviye1" value="0">
+        <input type="hidden" id="seviye2" name="seviye2" value="0">
+        <input type="hidden" id="seviye3" name="seviye3" value="0">
+
+        <button type="submit">Kaydet ve Çık</button>
+    </form>
+
+    <script>
+        let toplamPuan = 0;
+
+        // Puanları hesapla ve gizli inputları güncelle
+        function degerArtirAzalt(id, deger) {
+            let inputElement = document.getElementById(id);
+            let yeniDeger = parseInt(inputElement.value) + deger;
+            if (yeniDeger < 0) yeniDeger = 0;  // Puanın negatif olmasını engelle
+            inputElement.value = yeniDeger;
+
+            // Toplam puanı güncelle
+            hesaplaPuan();
+        }
+
+        // Toplam puanı hesapla
+        function hesaplaPuan() {
+            toplamPuan = 0;
+            let inputElements = document.querySelectorAll('input[type="hidden"]');
+            inputElements.forEach(input => {
+                toplamPuan += parseInt(input.value);
+            });
+            document.getElementById('toplamPuan').innerText = toplamPuan;
+        }
+    </script>
+</body>
+</html>
