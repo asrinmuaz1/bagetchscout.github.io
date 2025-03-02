@@ -75,4 +75,4 @@ def create_db():
 # Uygulamayı başlat
 if __name__ == '__main__':
     create_db()
-    app.run(debug=True)
+    app.run(debug=False,host='0.0.0.0')
